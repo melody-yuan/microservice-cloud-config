@@ -98,7 +98,7 @@ spring:
     datasource:
         url: jdbc:oracle:thin:@localhost:1521:ORCL
         username: system
-        password: 199020
+        password: 123456
         type: com.alibaba.druid.pool.DruidDataSource
         initialSize: 5
         minIdle: 5
