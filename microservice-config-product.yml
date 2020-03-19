@@ -1,0 +1,149 @@
+spring:
+    profiles:
+        active: dev # 激活开发环境配置
+
+server:
+    port: 8001 #端口号
+spring:
+    profiles: dev
+    application:
+        name: microservice-product-config
+    freemarker:
+        prefer-file-system-access: false
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        pool:
+            # 连接池中的最大空闲连接
+            max-idle: 100
+            # 连接池中的最小空闲连接
+            min-idle: 1
+            # 连接池最大连接数（使用负值表示没有限制）
+            max-active: 1000
+            # 连接池最大阻塞等待时间（使用负值表示没有限制）
+            max-wait: -1
+    datasource:
+        url: jdbc:oracle:thin:@localhost:1521:ORCL
+        username: system
+        password: 199020
+        type: com.alibaba.druid.pool.DruidDataSource
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        testWhileIdle: true
+        validationQuery: SELECT 'x'
+        testOnBorrow: false
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,log4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+mybatis:
+    mapper-locations: classpath*:mapper/**/*.xml,appMapper/**/*.xml
+    typeAliasesPackage: cn.rails.rsems.model,cn.rails.app.appModel
+logging:
+    level:
+        #cn.rails.rsems.mapper: DEBUG
+        cn.rails.app.appMapper: DEBUG
+    path: c:\logs\
+    file: log.log
+myProps: #自定义的属性和值
+    uploadUrl: C:\fileUpload\
+    uploadPort: 8080
+    listProp1:
+        - name: abc
+          value: abcValue
+        - name: efg
+          value: efgValue
+          locationQrcodeUrl: C:\RSEMSQrLocation\
+eureka:
+    client:
+        registerWithEureka: true # 服务注册开关
+        fetchRegistry: true # 服务发现开关
+        serviceUrl:
+            defaultZone: http://eureka6001.com:6001/eureka
+    instance:
+        instanceId: ${spring.application.name}:${server.port} # 指定实例ID,就不会显示主机名了
+        preferIpAddress: true #访问路径可以显示IP地址
+
+server:
+    port: 8001 #端口号
+spring:
+    profiles: prod
+    application:
+        name: microservice-product-config
+    freemarker:
+        prefer-file-system-access: false
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        pool:
+            # 连接池中的最大空闲连接
+            max-idle: 100
+            # 连接池中的最小空闲连接
+            min-idle: 1
+            # 连接池最大连接数（使用负值表示没有限制）
+            max-active: 1000
+            # 连接池最大阻塞等待时间（使用负值表示没有限制）
+            max-wait: -1
+    datasource:
+        url: jdbc:oracle:thin:@localhost:1521:ORCL
+        username: system
+        password: 199020
+        type: com.alibaba.druid.pool.DruidDataSource
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        testWhileIdle: true
+        validationQuery: SELECT 'x'
+        testOnBorrow: false
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,wall,log4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+mybatis:
+    mapper-locations: classpath*:mapper/**/*.xml,appMapper/**/*.xml
+    typeAliasesPackage: cn.rails.rsems.model,cn.rails.app.appModel
+logging:
+    level:
+        #cn.rails.rsems.mapper: DEBUG
+        cn.rails.app.appMapper: DEBUG
+    path: c:\logs\
+    file: log.log
+myProps: #自定义的属性和值
+    uploadUrl: C:\fileUpload\
+    uploadPort: 8080
+    listProp1:
+        - name: abc
+          value: abcValue
+        - name: efg
+          value: efgValue
+          locationQrcodeUrl: C:\RSEMSQrLocation\
+eureka:
+    client:
+        registerWithEureka: true # 服务注册开关
+        fetchRegistry: true # 服务发现开关
+        serviceUrl:
+            defaultZone: http://eureka6001.com:6001/eureka
+    instance:
+        instanceId: ${spring.application.name}:${server.port} # 指定实例ID,就不会显示主机名了
+        preferIpAddress: true #访问路径可以显示IP地址
